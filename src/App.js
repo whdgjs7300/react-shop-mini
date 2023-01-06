@@ -9,12 +9,12 @@ import data from './data';
 import { Routes,Route, Link, useNavigate, Outlet } 
 from 'react-router-dom';
 import Detail from './Page/Detail';
-
+import axios from 'axios';
 
 function App() {
-  let [shoes] = useState(data);
+  let [shoes,setShoes] = useState(data);
   let navigate = useNavigate();
-
+  let [count,setCount] = useState(0);
 
 
   return (  
@@ -42,7 +42,7 @@ function App() {
             <div className='main-bg'> 
           </div> 
       <div className='container'>  
-        <div className='row'> 
+        <div className='row'>  
           { 
             shoes.map((a,i)=>{  
               return( 
@@ -50,14 +50,22 @@ function App() {
               )  
             }) 
           }    
-          
-
+                      
+        </div>
+      </div>         
+          <button onClick={()=>{
+            setCount(count+1);
+            axios.get(`https://codingapple1.github.io/shop/data2.json`)
+            .then((resuit)=>{
+              let copy = [...shoes, ...resuit.data];
+              setShoes(copy);
+            }) 
             
+          }}>더보기</button>
         </div>
-      </div>   
-        </div>
-      } /> 
-      <Route path='/detail/:id' element={<Detail shoes={shoes} />} /> 
+        
+      } />  
+      <Route path='/detail/:id' element={<Detail shoes={shoes}  />} /> 
       
       
 
@@ -72,11 +80,7 @@ function App() {
       </Route>
 
     </Routes>
-
-
-
-    
-
+      
     </div>
   );
 }
@@ -92,7 +96,7 @@ function Event() {
   return(
     <div>
       오늘의이벤트
-      <Outlet></Outlet>
+      <Outlet></Outlet> 
     </div>
   )
 }
