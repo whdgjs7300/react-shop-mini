@@ -2,6 +2,10 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from 'styled-components'
+import Nav from 'react-bootstrap/Nav';
+import { Context1 } from "../App";
+import { useContext } from "react";
+
 
     let YellowBtn = styled.button`
     background : yellow;
@@ -14,6 +18,8 @@ import styled from 'styled-components'
         
     `
     const Detail = (props) => {
+        // state 보관함 해체 함수
+        let {재고, shoes} = useContext(Context1);
 
         let [count, setCount] = useState(0);
         let [alert,setAlert] = useState(true);
@@ -23,7 +29,9 @@ import styled from 'styled-components'
         let 찾은상품 = props.shoes.find((x)=>{
             return x.id == id;
         });
-    
+        let [tap,setTap] = useState(0);
+        
+        
 
 
     useEffect(()=>{
@@ -52,6 +60,9 @@ import styled from 'styled-components'
                         </div>
                     ) : null
                 }
+
+
+
                 {count}
                 <button onClick={()=>{setCount(count+1)}}>버튼</button>
         <div className="row"> 
@@ -69,9 +80,53 @@ import styled from 'styled-components'
         </div> 
     </div> 
     </div>    
+        <Nav variant="tabs" defaultActiveKey="link-0">
+        <Nav.Item>
+            <Nav.Link onClick={()=>{
+                setTap(0)
+            }} eventKey="link-0">Option 0</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+            <Nav.Link onClick={()=>{
+                setTap(1)
+            }} eventKey="link-1">Option 1</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+            <Nav.Link onClick={()=>{
+                setTap(2)
+            }} eventKey="link-2">Option 2</Nav.Link>
+        </Nav.Item>
+        </Nav>        
+        <Tapcontent tap={tap} />
+            
 
             </div>
         );
+    } 
+
+    
+function Tapcontent(props) {
+    let [fade,setFade] = useState('')
+    let {재고} = useContext(Context1);
+    
+
+    useEffect(()=>{
+        setTimeout(()=>{setFade('end') },100)
+        // 클린업 함수 return () => {} 위에 유즈이펙트 함수 실행전에 
+        // 먼저 실행하는 정리하는 함수
+        return ()=> {
+            setFade('')
+        }
+    },[props.tap])
+
+
+    if (props.tap == 0 ) {
+        return <div className={'start '+fade}>내용0</div>
+    } else if (props.tap == 1) {
+        return <div className={'start '+fade}>내용1</div>
+    } else {
+        return <div className={'start '+fade}>내용2</div>
     }
+}
 
     export default Detail;

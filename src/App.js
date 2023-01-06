@@ -4,21 +4,28 @@ import Button  from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import {useState} from 'react';
+import {createContext, useState} from 'react';
 import data from './data';
 import { Routes,Route, Link, useNavigate, Outlet } 
 from 'react-router-dom';
 import Detail from './Page/Detail';
 import axios from 'axios';
+import Cart from './Page/Cart';
 
-function App() {
+
+export const Context1 = createContext();
+
+
+function App() { 
   let [shoes,setShoes] = useState(data);
   let navigate = useNavigate();
   let [count,setCount] = useState(0);
+  let [재고] = useState([10,11,12]);
 
 
   return (  
-    <div className="App">
+    
+ <div className="App">
       
     
 
@@ -61,13 +68,16 @@ function App() {
               setShoes(copy);
             }) 
             
+
           }}>더보기</button>
         </div>
         
       } />  
       <Route path='/detail/:id' element={<Detail shoes={shoes}  />} /> 
       
-      
+      <Route path='/cart' element={<Cart/>}></Route>
+
+
 
       <Route path='/about' element={<About/>} > 
         <Route path='member' element={<div>멤버임</div>} /> 
@@ -82,6 +92,9 @@ function App() {
     </Routes>
       
     </div>
+
+   
+   
   );
 }
 function About() {
