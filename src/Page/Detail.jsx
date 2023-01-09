@@ -19,7 +19,7 @@ import { useContext } from "react";
     `
     const Detail = (props) => {
         // state 보관함 해체 함수
-        let {재고, shoes} = useContext(Context1);
+        
 
         let [count, setCount] = useState(0);
         let [alert,setAlert] = useState(true);
@@ -107,7 +107,7 @@ import { useContext } from "react";
     
 function Tapcontent(props) {
     let [fade,setFade] = useState('')
-    let {재고} = useContext(Context1);
+    
     
 
     useEffect(()=>{
@@ -117,7 +117,7 @@ function Tapcontent(props) {
         return ()=> {
             setFade('')
         }
-    },[props.tap])
+    },[props.tap]) 
 
 
     if (props.tap == 0 ) {
