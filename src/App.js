@@ -35,7 +35,7 @@ function App() {
           <Navbar.Brand href="#home">ShoeShop</Navbar.Brand>
           <Nav className="me-auto">
           <Link onClick={()=>{ navigate('/') }} to="/">홈</Link>
-            <Link onClick={()=>{ navigate('/detail/') }} to="detail">상세페이지</Link>
+            <Link onClick={()=>{ navigate('/cart/') }} to="cart">cart</Link>
             
           </Nav> 
         </Container>
@@ -57,7 +57,7 @@ function App() {
               )  
             }) 
           }    
-                      
+                    
         </div>
       </div>         
           <button onClick={()=>{

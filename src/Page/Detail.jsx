@@ -5,6 +5,9 @@ import styled from 'styled-components'
 import Nav from 'react-bootstrap/Nav';
 import { Context1 } from "../App";
 import { useContext } from "react";
+import { addItem } from "../store";
+import { useDispatch } from "react-redux";
+
 
 
     let YellowBtn = styled.button`
@@ -17,6 +20,7 @@ import { useContext } from "react";
         padding : 8px 16px;
         
     `
+
     const Detail = (props) => {
         // state 보관함 해체 함수
         
@@ -30,9 +34,9 @@ import { useContext } from "react";
             return x.id == id;
         });
         let [tap,setTap] = useState(0);
+        let dispatch = useDispatch()        
         
         
-
 
     useEffect(()=>{
         let a = setTimeout(()=>{
@@ -76,7 +80,9 @@ import { useContext } from "react";
         <h4 className="pt-5">{찾은상품.title}</h4>
         <p>{찾은상품.content}</p> 
         <p>{찾은상품.price}원</p>
-        <button className="btn btn-danger">주문하기</button> 
+        <button className="btn btn-danger" onClick={()=>{
+            dispatch(addItem({id : 2, name : 'Red Knit', count: 1}))
+        }} >주문하기</button> 
         </div> 
     </div> 
     </div>    

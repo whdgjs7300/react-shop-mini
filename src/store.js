@@ -1,25 +1,7 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
+import user from "./store/userSlice";
 
 // state 보관함
-let user = createSlice({
-    name : 'user',
-    initialState :{name : 'kim', age : 20},
-    reducers : {
-        changeName(state) {
-            state.name = 'park'
-        },
-        increase(state) {
-            state.age += 1 
-        },
-        
-    },
-        
-})
-
-
-// 함수 이름 다넣고 사용가능
-export let { changeName, increase } = user.actions
-
 
 let stock = createSlice({
     name : 'stock', 
@@ -27,13 +9,25 @@ let stock = createSlice({
 }) 
 
 let cart = createSlice({
-    name : 'cart', 
+    name : 'cart',  
     initialState : [
         {id : 0, name : 'white and Black', count: 2},
-        {id : 2, name : 'Grey Yordan', count: 1}
-    ]
-})
+        {id : 2, name : 'Grey Yordan', count: 1},        
+    ],
+    
+    reducers : { 
+        addCount(state,action) {
+            let 번호 = state.findIndex((a)=>{return a.id === action.payload })
+            state[번호].count++             
+        },
+        addItem(state, action) {
+            state.push(action.payload) 
+        } 
+    }
+}) 
 
+
+export let { addCount, addItem } =cart.actions
 
 export default configureStore({
     // 여기에 state 등록해야함
