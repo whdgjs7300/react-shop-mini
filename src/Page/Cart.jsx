@@ -6,8 +6,7 @@ import {  changeName, increase } from '../store/userSlice';
 const Cart = () => {
     // store 가져와줌
     let state = useSelector((state)=>{return state })
-    
-
+    // 액션함수 호출
     let dispatch = useDispatch();
     
     
@@ -17,7 +16,7 @@ const Cart = () => {
             {state.user.name} {state.user.age}의 장바구니
             </h6> 
             <button onClick={()=>{
-                dispatch(increase(100))
+                dispatch(increase(1))
             }}>버튼</button>
     <Table>
         <thead> 
@@ -26,7 +25,7 @@ const Cart = () => {
             <th>상품명</th>
             <th>수량</th>
             <th>변경하기</th> 
-            </tr> 
+            </tr>  
         </thead>
         <tbody>
             {
@@ -39,7 +38,7 @@ const Cart = () => {
                         <td>
                             <button onClick={()=>{
                                 dispatch(addCount(state.cart[i].id))
-                            }}>+</button>
+                            }}>+</button> 
                         </td>
                         </tr>
                     )

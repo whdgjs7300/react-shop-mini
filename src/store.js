@@ -5,6 +5,7 @@ import user from "./store/userSlice";
 
 let stock = createSlice({
     name : 'stock', 
+    // 초기값
     initialState : [10,11,12]
 }) 
 
@@ -14,11 +15,12 @@ let cart = createSlice({
         {id : 0, name : 'white and Black', count: 2},
         {id : 2, name : 'Grey Yordan', count: 1},        
     ],
-    
+    // 액션함수
     reducers : { 
         addCount(state,action) {
             let 번호 = state.findIndex((a)=>{return a.id === action.payload })
-            state[번호].count++             
+            state[번호].count++
+            
         },
         addItem(state, action) {
             state.push(action.payload) 
@@ -26,9 +28,10 @@ let cart = createSlice({
     }
 }) 
 
+// action function 
+export let { addCount, addItem } = cart.actions
 
-export let { addCount, addItem } =cart.actions
-
+// state
 export default configureStore({
     // 여기에 state 등록해야함
     reducer: { 

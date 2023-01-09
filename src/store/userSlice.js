@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 
+
 // state 보관함
 let user = createSlice({
     name : 'user',
@@ -12,7 +13,7 @@ let user = createSlice({
             state.age += action.payload 
         },
         
-    },    
+    },
 })
 
 // 함수 이름 다넣고 사용가능

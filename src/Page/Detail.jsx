@@ -36,7 +36,7 @@ import { useDispatch } from "react-redux";
         let [tap,setTap] = useState(0);
         let dispatch = useDispatch()        
         
-        
+
 
     useEffect(()=>{
         let a = setTimeout(()=>{
@@ -65,8 +65,6 @@ import { useDispatch } from "react-redux";
                     ) : null
                 }
 
-
-
                 {count}
                 <button onClick={()=>{setCount(count+1)}}>버튼</button>
         <div className="row"> 
@@ -80,8 +78,9 @@ import { useDispatch } from "react-redux";
         <h4 className="pt-5">{찾은상품.title}</h4>
         <p>{찾은상품.content}</p> 
         <p>{찾은상품.price}원</p>
+
         <button className="btn btn-danger" onClick={()=>{
-            dispatch(addItem({id : 2, name : 'Red Knit', count: 1}))
+            dispatch(addItem({id : 3, name : 'Red Knit', count: 1}))
         }} >주문하기</button> 
         </div> 
     </div> 
