@@ -4,24 +4,57 @@ import Button  from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import {createContext, useState} from 'react';
+import {createContext, lazy, useEffect, useState} from 'react';
 import data from './data';
 import { Routes,Route, Link, useNavigate, Outlet } 
 from 'react-router-dom';
 import Detail from './Page/Detail';
 import axios from 'axios';
 import Cart from './Page/Cart';
+import { useQuery } from 'react-query';
 
 
-export const Context1 = createContext();
+
+
+
+
 
 
 function App() { 
+
+  useEffect(()=>{
+    localStorage.setItem('watched',JSON.stringify( [] ))
+
+  },[])
+
+ 
+
+  let obj = {name:'kim'}
+  //array/object 저장하려면 JSON으로 바꾸면됨 (로컬스토리지)
+  localStorage.setItem('data',JSON.stringify(obj))
+  let 꺼낸거 = localStorage.getItem('data')
+  // 다시 object 파일로변경
+  console.log(JSON.parse(꺼낸거).name)
+
+
+
   let [shoes,setShoes] = useState(data);
   let navigate = useNavigate();
   let [count,setCount] = useState(0);
   let [재고] = useState([10,11,12]);
 
+  // 장점 1 데이터 요청 성공/실패/로딩중 쉽게 파악가능
+  // 실시간 데이터 출력가능
+
+  let result = useQuery('작명',()=>{
+    return axios.get('https://codingapple1.github.io/userdata.json').then((a)=>{
+      console.log('요청됨')
+    return a.data
+    }),
+    {staleTime : 2000 }
+  })
+
+  
 
   return (  
     
@@ -38,6 +71,13 @@ function App() {
             <Link onClick={()=>{ navigate('/cart/') }} to="cart">cart</Link>
             
           </Nav> 
+          <div className="title" >
+            {
+              result.isLoading && '로딩중'  
+            } 
+            { result.error && '에러'}
+            { result.data && result.data.name}
+          </div>
         </Container>
       </Navbar> 
 

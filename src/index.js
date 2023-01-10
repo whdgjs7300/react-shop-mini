@@ -6,18 +6,24 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
+// 실시간 데이터 관리 리액트 쿼리
+const queryClient = new QueryClient()
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
-
+    <QueryClientProvider client={queryClient}>
     <BrowserRouter>
       <Provider store={store}>
       <App />
     </Provider>  
     
     </BrowserRouter>
+    </QueryClientProvider>
+
+    
 
     
     

@@ -22,7 +22,7 @@ let cart = createSlice({
             state[번호].count++
             
         },
-        addItem(state, action) {
+        addItem(state, action) { 
             state.push(action.payload) 
         } 
     }

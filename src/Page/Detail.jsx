@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 
 
 
+
     let YellowBtn = styled.button`
     background : yellow;
     color : black;
@@ -36,7 +37,16 @@ import { useDispatch } from "react-redux";
         let [tap,setTap] = useState(0);
         let dispatch = useDispatch()        
         
-
+        
+        useEffect(()=>{
+            let 꺼낸거 = localStorage.getItem('watched')
+            꺼낸거 = JSON.parse(꺼낸거)
+            꺼낸거.push(찾은상품.id)
+            꺼낸거 = new Set(꺼낸거)
+            꺼낸거 = Array.from(꺼낸거) 
+            localStorage.setItem('watched', JSON.stringify(꺼낸거))
+        },[])
+        
 
     useEffect(()=>{
         let a = setTimeout(()=>{
