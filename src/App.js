@@ -45,7 +45,6 @@ function App() {
 
   // 장점 1 데이터 요청 성공/실패/로딩중 쉽게 파악가능
   // 실시간 데이터 출력가능
-
   let result = useQuery('작명',()=>{
     return axios.get('https://codingapple1.github.io/userdata.json').then((a)=>{
       console.log('요청됨')
@@ -53,7 +52,8 @@ function App() {
     }),
     {staleTime : 2000 }
   })
-
+  // PWA 
+  
   
 
   return (  
